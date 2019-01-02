@@ -23,13 +23,12 @@ Type graphArr[N][N]
 typedef struct _Node
 {
 	int					id;
-	Node*				next;
+	struct _Node*		next;
 }Node;
 
 Node		node[PART_COL];	//图的所有链表头指针
 Type		cost[N];		//决策过程中每个顶点到终点的费用
-int			rout[N];		//起点到终点的顶点编号(结果向量)
-int			path[N];		//
+int			path[N];		//路径选择
 
 //初始化段内邻接链,和宏PATH_ROW有关()
 void initGraph()
@@ -39,16 +38,16 @@ void initGraph()
 	
 	node[1].id = 1;
 	node[1].next = (Node*)malloc(sizeof(Node));
-	node[1].next->next->id = 2;
-	node[1].next->next->next = NULL;
+	node[1].next->id = 2;
+	node[1].next->next = NULL;
 
 	node[2].id = 3;
 	node[2].next = NULL;
 
 	node[3].id = 4;
 	node[3].next = (Node*)malloc(sizeof(Node));
-	node[3].next->next->id = 5;
-	node[3].next->next->next = NULL;
+	node[3].next->id = 5;
+	node[3].next->next = NULL;
 
 	node[4].id = 6;
 	node[4].next = NULL;
@@ -72,16 +71,17 @@ void initGraph()
 	{
 		cost[i] = INF;
 		path[i] = -1;
-		rout[i] = 0;
 	}
 	//设定终点id为6
 	path[PART_COL - 1] = 6;
+	//设定初始cost为0
+	cost[PART_COL - 1] = 0;
 }
 
 //动态寻最短路径
 void findPath()
 {
-	//段见循环,共PART_COL段
+	//段见循环,共PART_COL段(除去最后一个点6)
 	for (int i = PART_COL - 1; i >= 0; --i)
 	{	//段内循环,node[i-1]为头开始的链表(循环的是当前i结点列的前列
 		for (Node* pCurrNode = &node[i-1]; pCurrNode != NULL; pCurrNode = pCurrNode->next)
@@ -89,14 +89,52 @@ void findPath()
 			if (graphArr[pCurrNode->id][path[i]] + cost[i] < cost[i - 1])
 			{
 				//更新i-1段到终点花费为较短值
-				cost[i - 1] - graphArr[pCurrNode->id][path[i]] + cost[i];
+				cost[i - 1] = graphArr[pCurrNode->id][path[i]] + cost[i];
+		//		cost[i - 1] = graphArr[]
 				//更新i-1段路径选择
 				path[i - 1] = pCurrNode->id;
 			}
 		}
 	}
+	//由于pCurrNode修改了node[4].next的值,现将其复原
+	node[PART_COL - 1].next = NULL;
 }
 
+//释放图,宏PATH_ROW有关()
+void delGraph()
+{
+	for (int i = 0; i < PART_COL;++i)
+	{	//最多有两个节点,只需要判断下节点
+		if (node[i].next)
+		{
+			free(node[i].next);
+			node[i].next = NULL;
+		}
+			
+	}
+}
+
+//打印路径
+void printPath()
+{
+	puts("最短路径选择为:");
+	for (int i = 0; i < N&&path[i]!=-1; ++i)
+		printf("%d --> ", path[i]);
+	printf("NULL\n");
+	printf("最短长度为: %d\n", cost[0]);
+}
+
+
+int main()
+{
+	initGraph();
+	findPath();
+	printPath();
+	delGraph();
+
+	system("pause");
+	return 0;
+}
 
 
 //
