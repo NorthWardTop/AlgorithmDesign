@@ -1,0 +1,14 @@
+﻿生成启动时间为 2019/1/2 21:01:23。
+     1>项目“F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\算法分析-回朔算法-n后问题\算法分析-回朔算法-n后问题.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>f:\vs\学校作业\algorithmdesign\算法分析-回朔算法-n后问题\算法分析-回朔算法-n后问题\main.cpp(15): warning C4715: “isTrue”: 不是所有的控件路径都返回值
+       Link:
+         D:\Program Files\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\Debug\算法分析-回朔算法-n后问题.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\Debug\算法分析-回朔算法-n后问题.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\Debug\算法分析-回朔算法-n后问题.lib" /MACHINE:X86 Debug\main.obj
+         算法分析-回朔算法-n后问题.vcxproj -> F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\Debug\算法分析-回朔算法-n后问题.exe
+     1>已完成生成项目“F:\VS\学校作业\AlgorithmDesign\算法分析-回朔算法-n后问题\算法分析-回朔算法-n后问题\算法分析-回朔算法-n后问题.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.86
