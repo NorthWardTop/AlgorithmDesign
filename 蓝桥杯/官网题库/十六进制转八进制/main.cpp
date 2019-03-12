@@ -30,82 +30,103 @@
 　　先将十六进制数转换成某进制数，再由某进制数转换成八进制。
 */ 
 
-
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cmath>
-#include <queue>
-#include <list>
+#include <stdlib.h> 
 using namespace std;
 
-string hex_to_bin(const string& hex)
+string hex_to_bin(string const& hex)
 {
-	
+	string bin = "\0";
+
+	for (int j = 0; j < hex.length(); j++)
+	{
+		switch (hex.at(j))
+		{
+		case '0':bin += "0000"; break;
+		case '1':bin += "0001"; break;
+		case '2':bin += "0010"; break;
+		case '3':bin += "0011"; break;
+		case '4':bin += "0100"; break;
+		case '5':bin += "0101"; break;
+		case '6':bin += "0110"; break;
+		case '7':bin += "0111"; break;
+		case '8':bin += "1000"; break;
+		case '9':bin += "1001"; break;
+		case 'A':bin += "1010"; break;
+		case 'B':bin += "1011"; break;
+		case 'C':bin += "1100"; break;
+		case 'D':bin += "1101"; break;
+		case 'E':bin += "1110"; break;
+		case 'F':bin += "1111"; break;
+		default:break;
+		}
+	}
+	cout << "hex_to_bin:" << bin << endl;
+	return bin;
 }
 
 string bin_to_oct(const string& bin)
 {
-	 
+	string oct = "\0";
+	int tmp = 0;
+	//从第一个非0数开始变化
+	int j = 0;
+	for (j = 0; j < bin.length(); ++j)
+		if (bin[j] == '1')
+			break;
+	//第一次循环每三位一次 
+	for (int i = j; i < bin.length(); i += 3)
+	{
+		tmp = 0;
+		tmp += bin[i] == '1' ? 4 : 0;
+		tmp += bin[i + 1] == '1' ? 2 : 0;
+		tmp += bin[i + 2] == '1' ? 1 : 0;
+		oct += 48 + tmp; //当前8进制tmp转化为字符'8' 
+	}
+
+	cout << "bin_to_oct:" << oct << endl;
+	return oct;
 }
 
-#define INF 1000001
+
 
 int main(int argc, char *argv[]) {
-	//int n,a,tmp;
-//	int len=0; 
-//    cin>>n>>a;
-//    
-//    int* arr=new int[n];
-//    for(int i=0;i<n;++i)
-//    {
-//        cin>>arr[i];
-//    }
-
-//    int curr=a;
-//    int prev_i=a-1>=0?a-1:0;//越界问题 
-//    int next_i=a+1<n?a-1:a;
-//    
-//    
-//    while(index==0||index==n)
-//    {
-//    	int prev=abs(curr-arr[prev_i]);
-//	    int next=abs(curr-arr[next_i]);
-//	    if(prev<next)//前面小
-//		{
-//			len+=prev;
-//			index--;
-//			prev_i--;
-//		} 
-//		else
-//		{
-//			len+=next;
-//			index++;
-//			next_i++;
-//		}
-//    }
-//    cout<<len;
-
-
-	list<int> arr;
 	int n;
-	cin>>n;
-	for(int i=0;i<n;++i)
-		arr.push_back(i+1);
-	
-	
-	for( ;arr.size()!=1;)
+	cin >> n;
+	string* hex = new string[n];
+	string* bin = new string[n];
+	string* oct = new string[n];
+	if (hex == NULL || bin == NULL || oct == NULL)
+		cout << "申请失败!";
+	*hex = "\0";
+	*bin = "\0";
+	*oct = "\0";
+	string c;
+	for (int i = 0; i < n; ++i)
 	{
-		int tmp=arr.back();
-		cout<<tmp<<' ';
-		arr.pop_back();
-		tmp=arr.back();
-		arr.pop_back();
-		arr.push_front(tmp);
+		cin >> c;
+		hex[i] = c;
 	}
-    
+
+	for (int i = 0; i < n; ++i)
+	{
+		bin[i] = hex_to_bin(hex[i]);
+		oct[i] = bin_to_oct(bin[i]);
+	}
+
+	for (int i = 0; i < n; ++i)
+		cout << oct[i] << ' ';
+
+
+	delete [] hex;
+	delete [] oct;
+	delete [] bin;
+	system("pause");
 	return 0;
 }
+
 
 
 
